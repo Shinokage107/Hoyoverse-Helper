@@ -2,6 +2,7 @@ const honkai = require('./honkai.js');
 const genshin = require('./genshin.js');
 const tot = require('./tot.js');
 const db = require('../db.js');
+const { checkCodes } = require('./genshin.js');
 
 module.exports = {
     startHki3loginRoutine: startHki3loginRoutine,
@@ -18,11 +19,15 @@ async function startHki3loginRoutine(client){
     
 }
 
+
+
 async function startGenshinLoginRoutine(client){
     const pairs = await db.query('SELECT * FROM gilogin');
+    const codes = await checkCodes();
 
     for(const pair of pairs){
         genshin.genshinRequest(pair['cookie'], client, pair['discord_id']);    
+        //genshin.redeemCodes(pair['cookie'], client, pair['discord_id'], codes);
     }
     
 }

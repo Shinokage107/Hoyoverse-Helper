@@ -8,6 +8,7 @@ const { Console } = require("console");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  login.startGenshinLoginRoutine(client);
   loginQ.start();
 });
 
