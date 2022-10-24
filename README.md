@@ -12,7 +12,7 @@ I did borrowed allot from some of the already existing solutions on github but m
 Instruction
 
 1. I'm using Chrome browser, if you're using a different browser, some names may vary.
-2. Open the **siteScript.js** file and copy its contents.
+2. Copy the following code.
     ```
     var cookie=start();
     var ask=confirm('Cookie: '+cookie+'\n\nClick confirm to copy Cookie.');if(ask==true){copy(cookie);msg=cookie}else{msg='Cancel'}
