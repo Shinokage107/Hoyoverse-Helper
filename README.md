@@ -1,11 +1,17 @@
 # hoyoLogin
 A discord bot for automatic sign in. 
 
-### 1) Receiving Your Account Cookies
-  <details>
-  <summary>Instruction</summary>
+Currently it supports
+- Genshin
+- Honkai
+- Tears of Themis
 
-  1. I'm using Chrome browser, if you're using a different browser, some names may vary.
+I did borrowed allot from some of the already existing solutions on github but merged it into a bot and a db that simply holds discord id + user cookie. 
+
+### 1) Receiving Your Account Cookies
+Instruction
+
+1. I'm using Chrome browser, if you're using a different browser, some names may vary.
 2. Open the **siteScript.js** file and copy its contents.
     ```
     var cookie=start();
@@ -19,9 +25,7 @@ A discord bot for automatic sign in.
         }
     }
     ```
-3. Go to https://www.hoyolab.com/genshin/ then login.
+3. Go to https://www.hoyolab.com/genshin/ or to one of the other sides, then login.
 4. Right-click on the page and click on **View Code**, then click on the **Console** tab.
 5. Paste the code you copied in the second paragraph and press **Enter**.
 6. In the window that appears, click **Ok** and the necessary Cookies will be automatically copied to your clipboard. 
-![Cookie copy window](/images/hoyolab/h-step-1.png)
-</details>
