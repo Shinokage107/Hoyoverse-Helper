@@ -6,6 +6,8 @@ Currently it supports
 - Honkai
 - Tears of Themis
 
+- Genshin Auto Code redeems
+
 I did borrowed allot from some of the already existing solutions on github but merged it into a bot and a db that simply holds discord id + user cookie. 
 
 ### 1) Receiving Your Account Cookies
@@ -30,3 +32,34 @@ Instruction
 5. Right-click on the page and click on **View Code**, then click on the **Console** tab.
 6. Paste the code you copied in the second paragraph and press **Enter**.
 7. In the window that appears, click **Ok** and the necessary Cookies will be automatically copied to your clipboard. 
+
+### 2) Receiving Your Account Cookies for Genshin Redeems
+Instruction
+
+1. For some reason for redeeming codes in Genshin the bot needs different cookies. U can get them through a similar way.
+2. Copy the following code.
+    ```
+    var cookie=start();
+    var ask=confirm('Cookie: '+cookie+'\n\nClick confirm to copy Cookie.');if(ask==true){copy(cookie);msg=cookie}else{msg='Cancel'}
+    function start() {
+        return "cookie_token=" + getCookie("cookie_token") + ";account_id=" + getCookie("account_id") + ";";
+        function getCookie(name) {
+            const value = ";" + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    }
+    ```
+3. Now go to the official Genshin redeem page and login.  [Genshin Redeem site](https://genshin.hoyoverse.com/en/gift)
+5. Right-click on the page and click on **View Code**, then click on the **Console** tab.
+6. Paste the code you copied in the second paragraph and press **Enter**.
+7. In the window that appears, click **Ok** and the necessary Cookies will be automatically copied to your clipboard. 
+
+### 3) Feed the bot with ur cookies. 
+Instruction
+
+1. Use discord slashCommands to setup ur auto logins. 
+2. Make sure each login has there correct cookie. In some cases people have different accounts/cookies for Honkai and Genshin
+3. The cookie for Genshin daily login and Genshin code redeems are NOT THE SAME
+
+### For any questions feel free to reach out to me Shino#8238
