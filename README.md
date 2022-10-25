@@ -25,7 +25,8 @@ Instruction
         }
     }
     ```
-3. Go to https://www.hoyolab.com/genshin/ or to one of the other sides, then login.
-4. Right-click on the page and click on **View Code**, then click on the **Console** tab.
-5. Paste the code you copied in the second paragraph and press **Enter**.
-6. In the window that appears, click **Ok** and the necessary Cookies will be automatically copied to your clipboard. 
+3. Go to the daily sign in page of ur choice. 
+4. [Genshin](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj48vmej_v6AhU6gv0HHRa5AHoQFnoECBoQAQ&url=https%3A%2F%2Fact.hoyolab.com%2Fys%2Fevent%2Fsignin-sea-v3%2Findex.html%3Fact_id%3De202102251931481&usg=AOvVaw3j6wygLLVF0bTQvZIJH3_f)
+5. Right-click on the page and click on **View Code**, then click on the **Console** tab.
+6. Paste the code you copied in the second paragraph and press **Enter**.
+7. In the window that appears, click **Ok** and the necessary Cookies will be automatically copied to your clipboard. 
