@@ -1,4 +1,4 @@
-# hoyoLogin
+# Hoyoverse Automatisation
 A discord bot for automatic sign in. 
 
 Currently it supports
