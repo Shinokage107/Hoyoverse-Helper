@@ -15,6 +15,6 @@ module.exports = {
 
 
     async execute(interaction) {
-        await interaction.reply('https://github.com/Shinokage107/hoyoLogin/blob/main/README.md');
+        await interaction.reply('https://github.com/Shinokage107/Hoyoverse-Automatisation/wiki');
     },
   };
