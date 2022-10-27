@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require("discord.js");
 const db = require("../db.js");
-const honkai = require("../logins/honkai.js");
+const genshin = require("../logins/genshin.js");
 module.exports = {
-  name: "honkai",
-  description: "Sets up Auto-Login for Honkai Impact 3rd",
+  name: "genshincodes",
+  description: "Sets up Auto-Code-Redemption",
   type: "user",
 
   commandBuilder() {
@@ -14,7 +14,7 @@ module.exports = {
         option
           .setName("cookie")
           .setDescription(
-            "The Cookie from ur Account Login, info on how to get it under /help"
+            "The Cookie from ur Account Login, info on how to get it under /hoyoHelp"
           )
       );
     return data;
@@ -24,10 +24,10 @@ module.exports = {
     const cookie = interaction.options.getString("cookie");
     const discordId = interaction.user.id;
 
-    const data = await honkai.checkDailyNotSigned(cookie);
+    const data = await genshin.checkDailyNotSigned(cookie);
     if (!data)
       return await interaction.reply(
-        "Sry, i was not able to login with ur cookies :c \nThe Cookie should look like this: \n**ltoken=<Some weird text>;ltuid=<Some random number>;**"
+        "Sry, i was not able to login with ur cookies :c \nThe Cookie should look like this: \n**cookie_token=<Some weird text>;account_id=<Some random number>;**"
       );
 
     await db.query(
