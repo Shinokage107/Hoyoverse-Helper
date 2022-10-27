@@ -1,33 +1,41 @@
 require("dotenv").config();
 const fs = require("fs");
-const CronJob = require('cron').CronJob;
+const CronJob = require("cron").CronJob;
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-const login = require('./logins/loginManager.js');
-const { Console } = require("console");
+const login = require("./logins/loginManager.js");
+const { Console, time } = require("console");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  login.startGenshinLoginRoutine(client);
+
   loginQ.start();
+  redeemQ.start();
 });
 
-
 var loginQ = new CronJob(
-	'00 21 * * * *',
-	function() {
-    console.log('starting logins');
+  "00 */10 * * * *",
+  function () {
+    console.log("Started Login-Process => " + new Date().toLocaleString());
     login.startHki3loginRoutine(client);
-      login.startGenshinLoginRoutine(client);
-      login.startTotLoginRoutine(client);
-    console.log('login process ended');
-	},
-	null,
-	true,
-	'America/Los_Angeles'
+    login.startGenshinLoginRoutine(client);
+    login.startTotLoginRoutine(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
 );
 
-
+var redeemQ = new CronJob(
+  "00 */1 * * * *",
+  function () {
+    console.log("Started Redeem-Process => " + new Date().toLocaleString());
+    login.startGenshinRedeemRoutine(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
 
 client.commands = new Collection();
 
