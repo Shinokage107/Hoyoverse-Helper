@@ -10,7 +10,7 @@ async function replaceCookies(table) {
         pair["cookie"]
       )}" WHERE discord_id="${pair["discord_id"]}"`
     );
-    console.log(`updated ${pair[discord_id]} in ${table}`);
+    console.log(`updated ${pair["discord_id"]} in ${table}`);
   }
 }
 
