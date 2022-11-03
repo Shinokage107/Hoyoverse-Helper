@@ -4,10 +4,11 @@ const CronJob = require("cron").CronJob;
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
-const { Console, time } = require("console");
+const crypt = require("./encrypt.js");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
   login.startHki3loginRoutine(client);
   loginQ.start();
   redeemQ.start();
