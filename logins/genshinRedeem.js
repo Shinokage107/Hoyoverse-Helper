@@ -21,26 +21,32 @@ async function redeemCodes(cookie, client, discord_id, codes) {
 }
 
 async function checkCodes() {
-  const response = await fetch(
-    `https://raw.githubusercontent.com/ataraxyaffliction/gipn-json/main/gipn-update.json`,
-    {
-      headers: {
-        accept: "*/*",
-      },
-      referrerPolicy: "strict-origin-when-cross-origin",
-      method: "GET",
-      mode: "cors",
-    }
-  );
+  try {
+    const response = await fetch(
+      `https://raw.githubusercontent.com/ataraxyaffliction/gipn-json/main/gipn-update.json`,
+      {
+        headers: {
+          accept: "*/*",
+        },
+        referrerPolicy: "strict-origin-when-cross-origin",
+        method: "GET",
+        mode: "cors",
+      }
+    );
 
-  var codeList = [];
-  const data = await response.json();
-  for (const redeem of data.CODES) {
-    if (redeem.is_expired == false) {
-      codeList.push(redeem.code);
+    var codeList = [];
+    const data = await response.json();
+    for (const redeem of data.CODES) {
+      if (redeem.is_expired == false) {
+        codeList.push(redeem.code);
+      }
     }
+    return codeList;
+  } catch (error) {
+    console.log(
+      "Something went wrong fetching Genshin Redeem Code list\n" + error
+    );
   }
-  return codeList;
 }
 
 async function getUsedCodes(discord_id) {
@@ -77,7 +83,7 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
       client.users.send(discord_id, `I redeemed a code for u! => ${code}`);
       regCodeRedemption(discord_id, code);
 
-      console.log(data);
+      //console.log(data);
     }
   } catch (error) {
     if (error.retcode == -2017) {

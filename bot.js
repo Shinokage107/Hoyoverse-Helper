@@ -8,7 +8,7 @@ const { Console, time } = require("console");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-
+  login.startHki3loginRoutine(client);
   loginQ.start();
   redeemQ.start();
 });
