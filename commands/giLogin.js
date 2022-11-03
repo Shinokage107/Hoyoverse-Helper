@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const db = require("../db.js");
 const genshin = require("../logins/genshin.js");
+const crypto = require("../encrypt.js");
 module.exports = {
   name: "genshin",
   description: "Sets up Auto-Login for Genshin Impact",
@@ -31,7 +32,11 @@ module.exports = {
       );
 
     await db.query(
-      `INSERT INTO giredeem (discord_id, cookie) VALUES ("${discordId}", "${cookie}") ON DUPLICATE KEY UPDATE discord_id="${discordId}", cookie="${cookie}"`
+      `INSERT INTO giredeem (discord_id, cookie) VALUES ("${discordId}", "${crypto.encrypt(
+        cookie
+      )}") ON DUPLICATE KEY UPDATE discord_id="${discordId}", cookie="${crypto.encrypt(
+        cookie
+      )}"`
     );
 
     await interaction.reply(
