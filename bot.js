@@ -4,12 +4,14 @@ const CronJob = require("cron").CronJob;
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
-const crypt = require("./encrypt.js");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   login.startHki3loginRoutine(client);
+  login.startGenshinLoginRoutine(client);
+  login.startTotLoginRoutine(client);
+
   loginQ.start();
   redeemQ.start();
 });
