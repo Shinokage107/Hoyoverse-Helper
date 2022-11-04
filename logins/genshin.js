@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const embed = require("../libs/embeds.js");
 const ACT_ID = "e202102251931481";
 
 module.exports = {
@@ -13,17 +14,19 @@ async function genshinRequest(cookie, client, userId) {
   await DailySigned(cookie, userId);
   const data2 = await checkDailyNotSigned(cookie, userId);
 
-  log = "unfinished business";
+  var status = `Error`;
   if (data2.sign_cnt == data.sign_cnt) {
-    log = `Failed to sigh in, either theres a backend problem or your cookies are outdated`;
+    status = `Error`;
   } else {
-    log = `Your sign in is success, your total sign in is **${data2.sign_cnt} days **. \n U missed **${data2.sign_cnt_missed} days** :c`;
+    status = `Success`;
   }
 
-  client.users.send(userId, log);
+  await client.users.send(userId, {
+    embeds: [await embed.loginEmbed("Genshin", data2.sign_cnt, status)],
+  });
 }
 
-async function checkDailyNotSigned(cookie) {
+async function checkDailyNotSigned(cookie, userId) {
   try {
     const response = await fetch(
       `https://sg-hk4e-api.hoyolab.com/event/sol/resign_info?lang=en-us&act_id=${ACT_ID}`,
@@ -49,7 +52,7 @@ async function checkDailyNotSigned(cookie) {
   }
 }
 
-async function DailySigned(cookie) {
+async function DailySigned(cookie, userId) {
   try {
     const response = await fetch(
       `https://sg-hk4e-api.hoyolab.com/event/sol/sign?lang=en-us`,

@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const db = require("../db.js");
+const embeds = require("../libs/embeds.js");
 
 module.exports = {
   checkCodes: checkCodes,
@@ -80,7 +81,9 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     if (data.data == null) {
       throw data;
     } else {
-      client.users.send(discord_id, `I redeemed a code for u! => ${code}`);
+      client.users.send(discord_id, {
+        embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
+      });
       regCodeRedemption(discord_id, code);
 
       //console.log(data);
