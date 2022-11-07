@@ -5,6 +5,7 @@ module.exports = {
   log: log,
   regCodeRedemption: regCodeRedemption,
   getUser: getUser,
+  collectLogs: collectLogs,
 };
 
 var conn = mysql.createConnection({
@@ -31,6 +32,14 @@ async function regCodeRedemption(discord_id, code) {
 
 async function getUser(discord_id) {
   return await query(`SELECT * FROM user WHERE discord_id = "${discord_id}"`);
+}
+
+async function collectLogs(discord_id, days) {
+  return await query(
+    `SELECT * FROM log WHERE discord_id="${discord_id}" AND UNIX_TIMESTAMP(timestamp) >= ${
+      (Date.now() - days * 86400000) / 1000
+    } ;`
+  );
 }
 
 module.exports.query = query;

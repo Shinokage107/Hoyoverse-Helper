@@ -4,9 +4,12 @@ const CronJob = require("cron").CronJob;
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
+const messanger = require("./libs/messagingManager.js");
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  messanger.collectionMessage("225274418857771008", 0);
 
   login.startHki3loginRoutine(client);
   login.startGenshinLoginRoutine(client);
