@@ -21,11 +21,15 @@ async function hi3Request(cookie, client, userId) {
     status = `Success`;
   }
 
-  await client.users.send(userId, {
-    embeds: [
-      await embed.loginEmbed("Honkai Impact", data2.total_sign_day, status),
-    ],
-  });
+  try {
+    await client.users.send(userId, {
+      embeds: [
+        await embed.loginEmbed("Honkai Impact", data2.total_sign_day, status),
+      ],
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function checkDailyNotSigned(cookie, userId) {

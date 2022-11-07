@@ -81,9 +81,14 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     if (data.data == null) {
       throw data;
     } else {
-      client.users.send(discord_id, {
-        embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
-      });
+      try {
+        client.users.send(discord_id, {
+          embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
       regCodeRedemption(discord_id, code);
 
       //console.log(data);

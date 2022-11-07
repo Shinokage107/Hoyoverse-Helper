@@ -21,9 +21,13 @@ async function genshinRequest(cookie, client, userId) {
     status = `Success`;
   }
 
-  await client.users.send(userId, {
-    embeds: [await embed.loginEmbed("Genshin", data2.sign_cnt, status)],
-  });
+  try {
+    await client.users.send(userId, {
+      embeds: [await embed.loginEmbed("Genshin", data2.sign_cnt, status)],
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function checkDailyNotSigned(cookie, userId) {
