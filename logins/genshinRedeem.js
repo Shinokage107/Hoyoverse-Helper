@@ -81,10 +81,20 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     if (data.data == null) {
       throw data;
     } else {
+      userNotification = 1;
       try {
-        client.users.send(discord_id, {
-          embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
-        });
+        user = await db.getUser(userId);
+        userNotification = user[0].notification_type;
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        if (true) {
+          client.users.send(discord_id, {
+            embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
+          });
+        }
         db.log(discord_id, 1, 2, code);
       } catch (error) {
         console.log(error);

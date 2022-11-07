@@ -22,12 +22,26 @@ async function hi3Request(cookie, client, userId) {
     status = `Success`;
   }
 
+  userNotification = 1;
   try {
-    await client.users.send(userId, {
-      embeds: [
-        await embed.loginEmbed("Honkai Impact", data2.total_sign_day, status),
-      ],
-    });
+    user = await db.getUser(userId);
+    userNotification = user[0].notification_type;
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    if (
+      userNotification == 1 ||
+      userNotification == null ||
+      status == "Error"
+    ) {
+      await client.users.send(userId, {
+        embeds: [
+          await embed.loginEmbed("Honkai Impact", data2.total_sign_day, status),
+        ],
+      });
+    }
     db.log(userId, 2, 1, status);
   } catch (error) {
     console.log(error);

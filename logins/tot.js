@@ -22,12 +22,30 @@ async function totRequest(cookie, client, userId) {
     status = `Success`;
   }
 
+  userNotification = 1;
   try {
-    await client.users.send(userId, {
-      embeds: [
-        await embed.loginEmbed("Tears of Themis", data2.total_sign_day, status),
-      ],
-    });
+    user = await db.getUser(userId);
+    userNotification = user[0].notification_type;
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    if (
+      userNotification == 1 ||
+      userNotification == null ||
+      status == "Error"
+    ) {
+      await client.users.send(userId, {
+        embeds: [
+          await embed.loginEmbed(
+            "Tears of Themis",
+            data2.total_sign_day,
+            status
+          ),
+        ],
+      });
+    }
     db.log(userId, 3, 1, status);
   } catch (error) {
     console.log(error);

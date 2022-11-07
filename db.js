@@ -4,6 +4,7 @@ const util = require("util");
 module.exports = {
   log: log,
   regCodeRedemption: regCodeRedemption,
+  getUser: getUser,
 };
 
 var conn = mysql.createConnection({
@@ -26,6 +27,10 @@ async function regCodeRedemption(discord_id, code) {
   await query(
     `INSERT INTO gicodes (discord_id, code) VALUES ("${discord_id}", "${code}")`
   );
+}
+
+async function getUser(discord_id) {
+  return await query(`SELECT * FROM user WHERE discord_id = "${discord_id}"`);
 }
 
 module.exports.query = query;
