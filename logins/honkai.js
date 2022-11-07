@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const ACT_ID = "e202110291205111";
+const db = require("../db.js");
 const embed = require("../libs/embeds.js");
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
 
 async function hi3Request(cookie, client, userId) {
   const data = await checkDailyNotSigned(cookie, userId);
-  if (data.is_sign == true) return;
+  //if (data.is_sign == true) return;
 
   await DailySigned(cookie, userId);
   const data2 = await checkDailyNotSigned(cookie, userId);
@@ -27,6 +28,7 @@ async function hi3Request(cookie, client, userId) {
         await embed.loginEmbed("Honkai Impact", data2.total_sign_day, status),
       ],
     });
+    db.log(userId, 2, 1, status);
   } catch (error) {
     console.log(error);
   }

@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const ACT_ID = "e202202281857121";
 const embed = require("../libs/embeds.js");
+const db = require("../db.js");
 
 module.exports = {
   totRequest: totRequest,
@@ -27,6 +28,7 @@ async function totRequest(cookie, client, userId) {
         await embed.loginEmbed("Tears of Themis", data2.total_sign_day, status),
       ],
     });
+    db.log(userId, 3, 1, status);
   } catch (error) {
     console.log(error);
   }

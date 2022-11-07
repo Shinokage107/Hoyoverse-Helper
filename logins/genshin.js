@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const embed = require("../libs/embeds.js");
+const db = require("../db.js");
 const ACT_ID = "e202102251931481";
 
 module.exports = {
@@ -25,6 +26,7 @@ async function genshinRequest(cookie, client, userId) {
     await client.users.send(userId, {
       embeds: [await embed.loginEmbed("Genshin", data2.sign_cnt, status)],
     });
+    await db.log(userId, 1, 1, status);
   } catch (error) {
     console.log(error);
   }

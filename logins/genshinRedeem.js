@@ -85,11 +85,12 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
         client.users.send(discord_id, {
           embeds: [await embeds.codeRedeemEmbed("Genshin", code)],
         });
+        db.log(discord_id, 1, 2, code);
       } catch (error) {
         console.log(error);
       }
 
-      regCodeRedemption(discord_id, code);
+      db.regCodeRedemption(discord_id, code);
 
       //console.log(data);
     }
@@ -103,12 +104,6 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     }
     return false;
   }
-}
-
-async function regCodeRedemption(discord_id, code) {
-  await db.query(
-    `INSERT INTO gicodes (discord_id, code) VALUES ("${discord_id}", "${code}")`
-  );
 }
 
 async function getAccData(cookie) {
