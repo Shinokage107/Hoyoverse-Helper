@@ -6,6 +6,7 @@ module.exports = {
   regCodeRedemption: regCodeRedemption,
   getUser: getUser,
   collectLogs: collectLogs,
+  getUserByType: getUserByType,
 };
 
 var conn = mysql.createConnection({
@@ -33,6 +34,11 @@ async function regCodeRedemption(discord_id, code) {
 async function getUser(discord_id) {
   return await query(`SELECT * FROM user WHERE discord_id = "${discord_id}"`);
 }
+
+async function getUserByType(type) {
+  return await query(`SELECT * FROM user WHERE notification_type = ${type}`);
+}
+
 
 async function collectLogs(discord_id, days) {
   return await query(
