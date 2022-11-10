@@ -64,7 +64,7 @@ async function collectionMessage(discord_id, days, client) {
 }
 
 async function dailyMessage(client) {
-  userList = await db.getUserByType(2);
+  userList = await db.getUserByType(1);
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 1, client);
@@ -72,7 +72,7 @@ async function dailyMessage(client) {
 }
 
 async function weeklyMessage() {
-  userList = await db.getUserByType(3);
+  userList = await db.getUserByType(2);
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 7, client);
@@ -80,7 +80,7 @@ async function weeklyMessage() {
 }
 
 async function monthlyMessage() {
-  userList = await db.getUserByType(4);
+  userList = await db.getUserByType(3);
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 30, client);
