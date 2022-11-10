@@ -10,7 +10,7 @@ module.exports = {
 
 async function hi3Request(cookie, client, userId) {
   const data = await checkDailyNotSigned(cookie, userId);
-  //if (data.is_sign == true) return;
+  if (data.is_sign == true) return;
 
   await DailySigned(cookie, userId);
   const data2 = await checkDailyNotSigned(cookie, userId);

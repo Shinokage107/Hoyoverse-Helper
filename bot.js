@@ -1,5 +1,6 @@
 require("dotenv").config();
 const fs = require("fs");
+const CronJob = require("cron").CronJob;
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
@@ -12,10 +13,77 @@ client.on("ready", () => {
   login.startGenshinLoginRoutine(client);
   login.startTotLoginRoutine(client);
 
-  messanger.dailyMessageJob.start();
-  login.loginQ.start();
-  login.redeemQ.start();
+  messanger.dailyMessage(client);
+
+  dailyMessageJob.start();
+  weeklyMessageJob.start();
+  monthlyMessageJob.start();
+  loginQ.start();
+  redeemQ.start();
 });
+
+var loginQ = new CronJob(
+  "00 */10 * * * *",
+  function () {
+    console.log("Started Login-Process => " + new Date().toLocaleString());
+    login.startHki3loginRoutine(client);
+    login.startGenshinLoginRoutine(client);
+    login.startTotLoginRoutine(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
+
+var redeemQ = new CronJob(
+  "00 */1 * * * *",
+  function () {
+    console.log("Started Redeem-Process => " + new Date().toLocaleString());
+    login.startGenshinRedeemRoutine(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
+
+var dailyMessageJob = new CronJob(
+  "00 00 19 * * *",
+  function () {
+    console.log(
+      "Started Started Daily Messaging => " + new Date().toLocaleString()
+    );
+    messanger.dailyMessage(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
+
+var weeklyMessageJob = new CronJob(
+  "00 00 19 * * 1",
+  function () {
+    console.log(
+      "Started Started Weekly Messaging => " + new Date().toLocaleString()
+    );
+    messanger.weeklyMessage(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
+
+var monthlyMessageJob = new CronJob(
+  "00 00 19 1 * 1",
+  function () {
+    console.log(
+      "Started Started Monthly Messaging => " + new Date().toLocaleString()
+    );
+    messanger.monthlyMessage(client);
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
 
 client.commands = new Collection();
 

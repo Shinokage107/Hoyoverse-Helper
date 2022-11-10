@@ -4,40 +4,13 @@ const genshinRedeem = require("./genshinRedeem.js");
 const tot = require("./tot.js");
 const db = require("../db.js");
 const crypto = require("../encrypt.js");
-const CronJob = require("cron").CronJob;
 
 module.exports = {
   startHki3loginRoutine: startHki3loginRoutine,
   startGenshinLoginRoutine: startGenshinLoginRoutine,
   startGenshinRedeemRoutine: startGenshinRedeemRoutine,
   startTotLoginRoutine: startTotLoginRoutine,
-  loginQ: loginQ,
-  redeemQ: redeemQ,
 };
-
-var loginQ = new CronJob(
-  "00 */10 * * * *",
-  function () {
-    console.log("Started Login-Process => " + new Date().toLocaleString());
-    login.startHki3loginRoutine(client);
-    login.startGenshinLoginRoutine(client);
-    login.startTotLoginRoutine(client);
-  },
-  null,
-  true,
-  "America/Los_Angeles"
-);
-
-var redeemQ = new CronJob(
-  "00 */1 * * * *",
-  function () {
-    console.log("Started Redeem-Process => " + new Date().toLocaleString());
-    login.startGenshinRedeemRoutine(client);
-  },
-  null,
-  true,
-  "America/Los_Angeles"
-);
 
 async function startHki3loginRoutine(client) {
   const pairs = await db.query("SELECT * FROM hki3login");
