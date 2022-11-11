@@ -22,7 +22,7 @@ async function totRequest(cookie, client, userId) {
     status = `Success`;
   }
 
-  userNotification = 1;
+  userNotification = 0;
   try {
     user = await db.getUser(userId);
     userNotification = user[0].notification_type;

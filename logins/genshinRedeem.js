@@ -81,7 +81,7 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     if (data.data == null) {
       throw data;
     } else {
-      userNotification = 1;
+      userNotification = 0;
       try {
         user = await db.getUser(userId);
         userNotification = user[0].notification_type;
