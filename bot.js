@@ -9,12 +9,6 @@ const messanger = require("./libs/messagingManager.js");
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  login.startHki3loginRoutine(client);
-  login.startGenshinLoginRoutine(client);
-  login.startTotLoginRoutine(client);
-
-  messanger.dailyMessage(client);
-
   dailyMessageJob.start();
   weeklyMessageJob.start();
   monthlyMessageJob.start();
@@ -25,7 +19,7 @@ client.on("ready", () => {
 var loginQ = new CronJob(
   "00 */10 * * * *",
   function () {
-    console.log("Started Login-Process => " + new Date().toLocaleString());
+    //console.log("Started Login-Process => " + new Date().toLocaleString());
     login.startHki3loginRoutine(client);
     login.startGenshinLoginRoutine(client);
     login.startTotLoginRoutine(client);
@@ -38,7 +32,7 @@ var loginQ = new CronJob(
 var redeemQ = new CronJob(
   "00 */1 * * * *",
   function () {
-    console.log("Started Redeem-Process => " + new Date().toLocaleString());
+    //console.log("Started Redeem-Process => " + new Date().toLocaleString());
     login.startGenshinRedeemRoutine(client);
   },
   null,

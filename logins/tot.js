@@ -32,7 +32,7 @@ async function totRequest(cookie, client, userId) {
 
   try {
     if (
-      userNotification == 1 ||
+      userNotification == 0 ||
       userNotification == null ||
       status == "Error"
     ) {
