@@ -6,9 +6,14 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
 
+const version = 1.51;
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-
+  client.users.send(
+    process.env.DEV_ID,
+    `Restarted the bot. Version => ${version}`
+  );
   dailyMessageJob.start();
   weeklyMessageJob.start();
   monthlyMessageJob.start();
