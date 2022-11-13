@@ -6,7 +6,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
 
-const version = 1.51;
+const version = 1.52;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
