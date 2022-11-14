@@ -71,7 +71,7 @@ async function dailyMessage(client) {
   }
 }
 
-async function weeklyMessage() {
+async function weeklyMessage(client) {
   userList = await db.getUserByType(2);
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
@@ -79,7 +79,7 @@ async function weeklyMessage() {
   }
 }
 
-async function monthlyMessage() {
+async function monthlyMessage(client) {
   userList = await db.getUserByType(3);
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
