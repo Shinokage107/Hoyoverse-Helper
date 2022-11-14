@@ -72,7 +72,7 @@ var weeklyMessageJob = new CronJob(
 );
 
 var monthlyMessageJob = new CronJob(
-  "00 00 09 1 * 1",
+  "00 00 09 1 * *",
   function () {
     console.log(
       "Started Started Monthly Messaging => " + new Date().toLocaleString()
