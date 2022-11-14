@@ -46,7 +46,7 @@ var redeemQ = new CronJob(
 );
 
 var dailyMessageJob = new CronJob(
-  "00 00 09 * * *",
+  "00 00 12 * * *",
   function () {
     console.log(
       "Started Started Daily Messaging => " + new Date().toLocaleString()
@@ -59,7 +59,7 @@ var dailyMessageJob = new CronJob(
 );
 
 var weeklyMessageJob = new CronJob(
-  "00 00 09 * * 1",
+  "00 00 12 * * 1",
   function () {
     console.log(
       "Started Started Weekly Messaging => " + new Date().toLocaleString()
