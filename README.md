@@ -26,7 +26,7 @@ Currently it supports
 
 # Guide 
 
-For a guide to get ur cookies pls refer to the [Wiki](https://github.com/Shinokage107/Hoyoverse-Helper/wiki)
+For a guide to get ur cookies pls refer to the [Wiki](https://github.com/Shinokage107/Hoyoverse-Helper/wiki/How-to-get-ur-Cookies)
 
 
 # Invite 
