@@ -16,7 +16,9 @@ client.on("ready", () => {
     `Restarted the bot. Version => ${version}`
   );
 
-  emebeds.codeRedeemEmbed("Genhsin", "dsjagd");
+  client.users.sendMessage(225274418857771008, {
+    embeds: [embeds.codeRedeemEmbed("Genshin", "271367126")],
+  });
   dailyMessageJob.start();
   weeklyMessageJob.start();
   monthlyMessageJob.start();
