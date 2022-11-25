@@ -5,6 +5,7 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
+const emebeds = require("./libs/embed.js");
 
 const version = 1.52;
 
@@ -14,6 +15,8 @@ client.on("ready", () => {
     process.env.DEV_ID,
     `Restarted the bot. Version => ${version}`
   );
+
+  emebeds.codeRedeemEmbed("Genhsin", "dsjagd");
   dailyMessageJob.start();
   weeklyMessageJob.start();
   monthlyMessageJob.start();
