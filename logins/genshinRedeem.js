@@ -81,13 +81,13 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     if (data.data == null) {
       throw data;
     } else {
-      userNotification = 0;
+      /* userNotification = 0;
       try {
         user = await db.getUser(userId);
         userNotification = user[0].notification_type;
       } catch (error) {
         console.log(error);
-      }
+      }*/
 
       try {
         if (true) {
@@ -106,7 +106,7 @@ async function redeemCode(acc, cookie, code, discord_id, client) {
     }
   } catch (error) {
     if (error.retcode == -2017) {
-      regCodeRedemption(discord_id, code);
+      db.regCodeRedemption(discord_id, code);
     } else if (error.retcode != -2016) {
       console.log(
         `user: ${discord_id} check info failed with error: ${error.message}`

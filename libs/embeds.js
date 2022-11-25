@@ -36,7 +36,7 @@ function codeRedeemEmbed(game, code) {
   var embed = new EmbedBuilder()
     .setTitle(`${game} Code Redemption`)
     .setColor(color)
-    .addDescription(`I redeemed a code for u! => ${code}`)
+    .setDescription(`I redeemed a code for u! => ${code}`)
     .setTimestamp();
 
   return embed;
