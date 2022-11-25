@@ -5,9 +5,8 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
-const emebeds = require("./libs/embeds.js");
 
-const version = 1.531;
+const version = 1.54;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -16,9 +15,6 @@ client.on("ready", () => {
     `Restarted the bot. Version => ${version}`
   );
 
-  client.users.sendMessage(225274418857771008, {
-    embeds: [embeds.codeRedeemEmbed("Genshin", "271367126")],
-  });
   dailyMessageJob.start();
   weeklyMessageJob.start();
   monthlyMessageJob.start();
