@@ -5,7 +5,7 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
-const emebeds = require("./libs/embed.js");
+const emebeds = require("./libs/embeds.js");
 
 const version = 1.531;
 
