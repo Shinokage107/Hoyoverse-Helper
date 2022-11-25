@@ -7,7 +7,7 @@ const login = require("./logins/loginManager.js");
 const messanger = require("./libs/messagingManager.js");
 const emebeds = require("./libs/embed.js");
 
-const version = 1.52;
+const version = 1.531;
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
