@@ -1,5 +1,9 @@
+#THIS PROJECT IS NOT BEING CONTINUED
+This project is currently on ice. Hoyoverse was rolling out their token_v2 across all endpoints. The token_v2 needs to be refreshed way more often and thus this whole bot is just kinda useless. You can still use the V1 token, but it will throw errors here and their and im sure it will be completely depricated soonTM.
+
+
 # Hoyoverse Automatisation
-Version: 1.53
+Version: 1.8
 
 A discord bot for automatic sign in and code redemption.
 
@@ -29,6 +33,7 @@ Currently it supports
 For a guide to get ur cookies pls refer to the [Wiki](https://github.com/Shinokage107/Hoyoverse-Helper/wiki/How-to-get-ur-Cookies)
 
 
-# Invite 
-A public version of the bot is hosted and maintained by me. [U can invite the bot here!](https://discord.com/oauth2/authorize?client_id=1033996429674426379&scope=bot&permissions=8)
+
+
+
 

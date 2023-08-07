@@ -36,7 +36,7 @@ async function getUser(discord_id) {
 }
 
 async function getUserByType(type) {
-  return await query(`SELECT * FROM user WHERE notification_type = ${type}`);
+  return await query(`SELECT * FROM user WHERE notification_type = "${type}"`);
 }
 
 

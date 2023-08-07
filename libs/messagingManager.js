@@ -14,31 +14,20 @@ async function collectionMessage(discord_id, days, client) {
   var genshinError = 0;
   var honkaiSuccess = 0;
   var honkaiError = 0;
-  var totSuccess = 0;
-  var totError = 0;
-  var genshinRedeem = [];
 
   for (let i = 0; i < logs.length; i++) {
     const entry = logs[i];
-    if (entry.type_id == 2 && entry.game_id == 1) {
-      genshinRedeem.push(entry.value);
-    } else if (entry.type_id == 1 && entry.game_id == 1) {
+    if (entry.type_id == "sign" && entry.game_id == "gi") {
       if (entry.value != "Error") {
         genshinSuccess++;
       } else {
         genshinError++;
       }
-    } else if (entry.type_id == 1 && entry.game_id == 2) {
+    } else if (entry.type_id == "sign" && entry.game_id == "hki") {
       if (entry.value != "Error") {
         honkaiSuccess++;
       } else {
         honkaiError++;
-      }
-    } else if (entry.type_id == 1 && entry.game_id == 3) {
-      if (entry.value != "Error") {
-        totSuccess++;
-      } else {
-        totError++;
       }
     }
   }
@@ -51,9 +40,6 @@ async function collectionMessage(discord_id, days, client) {
           genshinError,
           honkaiSuccess,
           honkaiError,
-          totSuccess,
-          totError,
-          genshinRedeem,
           days
         ),
       ],
@@ -64,7 +50,7 @@ async function collectionMessage(discord_id, days, client) {
 }
 
 async function dailyMessage(client) {
-  userList = await db.getUserByType(1);
+  userList = await db.getUserByType("d");
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 1, client);
@@ -72,7 +58,7 @@ async function dailyMessage(client) {
 }
 
 async function weeklyMessage(client) {
-  userList = await db.getUserByType(2);
+  userList = await db.getUserByType("w");
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 7, client);
@@ -80,7 +66,7 @@ async function weeklyMessage(client) {
 }
 
 async function monthlyMessage(client) {
-  userList = await db.getUserByType(3);
+  userList = await db.getUserByType("m");
   for (let i = 0; i < userList.length; i++) {
     const user = userList[i];
     collectionMessage(user.discord_id, 30, client);

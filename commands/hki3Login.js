@@ -2,9 +2,10 @@ const { SlashCommandBuilder } = require("discord.js");
 const db = require("../db.js");
 const honkai = require("../logins/honkai.js");
 const crypto = require("../encrypt.js");
+const { HonkaiImpact, LanguageEnum } = require ('hoyoapi')
 module.exports = {
   name: "honkai",
-  description: "Sets up Auto-Login for Honkai Impact 3rd",
+  description: "Sets up Auto-Dailys for Honkai Impact 3rd",
   type: "user",
 
   commandBuilder() {
@@ -25,14 +26,17 @@ module.exports = {
     const cookie = interaction.options.getString("cookie");
     const discordId = interaction.user.id;
 
-    const data = await honkai.checkDailyNotSigned(cookie);
+    const data = HonkaiImpact.create({
+      cookie: 'cookie',
+      lang: LanguageEnum.ENGLISH, 
+    })
     if (!data)
       return await interaction.reply(
         "Sry, i was not able to login with ur cookies :c \nThe Cookie should look like this: \n**ltoken=<Some weird text>;ltuid=<Some random number>;**"
       );
 
     await db.query(
-      `INSERT INTO giredeem (discord_id, cookie) VALUES ("${discordId}", "${crypto.encrypt(
+      `INSERT INTO user (discord_id, hki_cookie) VALUES ("${discordId}", "${crypto.encrypt(
         cookie
       )}") ON DUPLICATE KEY UPDATE discord_id="${discordId}", cookie="${crypto.encrypt(
         cookie

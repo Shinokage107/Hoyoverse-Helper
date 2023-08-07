@@ -1,59 +1,20 @@
 const honkai = require("./honkai.js");
 const genshin = require("./genshin.js");
-const genshinRedeem = require("./genshinRedeem.js");
-const tot = require("./tot.js");
 const db = require("../db.js");
 const crypto = require("../encrypt.js");
 
 module.exports = {
-  startHki3loginRoutine: startHki3loginRoutine,
-  startGenshinLoginRoutine: startGenshinLoginRoutine,
-  startGenshinRedeemRoutine: startGenshinRedeemRoutine,
-  startTotLoginRoutine: startTotLoginRoutine,
+  startDailyRoutine: startDailyRoutine
 };
 
-async function startHki3loginRoutine(client) {
-  const pairs = await db.query("SELECT * FROM hki3login");
+async function startDailyRoutine(client){
+  const users = await db.query("SELECT * FROM user");
 
-  for (const pair of pairs) {
-    honkai.hi3Request(
-      crypto.decrypt(pair["cookie"]),
-      client,
-      pair["discord_id"]
-    );
+  for (const user of users){
+    if(user["hki_cookie"] != null) honkai.hkiDaily(crypto.decrypt(user["hki_cookie"]), client, user["discord_id"]);
+    if(user["gi_cookie"] != null) genshin.giDaily(crypto.decrypt(user["gi_cookie"]), client, user["discord_id"]);
   }
 }
 
-async function startGenshinLoginRoutine(client) {
-  const pairs = await db.query("SELECT * FROM gilogin");
 
-  for (const pair of pairs) {
-    genshin.genshinRequest(
-      crypto.decrypt(pair["cookie"]),
-      client,
-      pair["discord_id"]
-    );
-  }
-}
 
-async function startGenshinRedeemRoutine(client) {
-  const pairs = await db.query("SELECT * FROM giredeem");
-  const codes = await genshinRedeem.checkCodes();
-
-  for (const pair of pairs) {
-    genshinRedeem.redeemCodes(
-      crypto.decrypt(pair["cookie"]),
-      client,
-      pair["discord_id"],
-      codes
-    );
-  }
-}
-
-async function startTotLoginRoutine(client) {
-  const pairs = await db.query("SELECT * FROM totlogin");
-
-  for (const pair of pairs) {
-    tot.totRequest(crypto.decrypt(pair["cookie"]), client, pair["discord_id"]);
-  }
-}

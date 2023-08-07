@@ -15,11 +15,10 @@ client.on("ready", () => {
     `Restarted the bot. Version => ${version}`
   );
 
-  dailyMessageJob.start();
-  weeklyMessageJob.start();
-  monthlyMessageJob.start();
+  // dailyMessageJob.start();
+  // weeklyMessageJob.start();
+  // monthlyMessageJob.start();
   loginQ.start();
-  redeemQ.start();
 });
 
 var loginQ = new CronJob(
@@ -28,23 +27,12 @@ var loginQ = new CronJob(
     //console.log("Started Login-Process => " + new Date().toLocaleString());
     login.startHki3loginRoutine(client);
     login.startGenshinLoginRoutine(client);
-    login.startTotLoginRoutine(client);
   },
   null,
   true,
   "America/Los_Angeles"
 );
 
-var redeemQ = new CronJob(
-  "00 */1 * * * *",
-  function () {
-    //console.log("Started Redeem-Process => " + new Date().toLocaleString());
-    login.startGenshinRedeemRoutine(client);
-  },
-  null,
-  true,
-  "America/Los_Angeles"
-);
 
 var dailyMessageJob = new CronJob(
   "00 00 09 * * *",

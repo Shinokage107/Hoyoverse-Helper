@@ -16,21 +16,21 @@ module.exports = {
           .setDescription("The type of notification")
           .setRequired(true)
           .addChoices(
-            { name: "Instant", value: 0 },
-            { name: "Daily", value: 1 },
-            { name: "Weekly", value: 2 },
-            { name: "Monthly", value: 3 }
+            { name: "Instant", value: "i" },
+            { name: "Daily", value: "d" },
+            { name: "Weekly", value: "w" },
+            { name: "Monthly", value: "m" }
           )
       );
     return data;
   },
 
   async execute(interaction) {
-    const type = interaction.options.getInteger("type");
+    const type = interaction.options.getString("type");
     const discordId = interaction.user.id;
 
     await db.query(
-      `INSERT INTO user (discord_id, notification_type) VALUES ("${discordId}", ${type}) ON DUPLICATE KEY UPDATE discord_id="${discordId}", notification_type=${type}`
+      `INSERT INTO user (discord_id, notification_type) VALUES ("${discordId}", ${type}) ON DUPLICATE KEY UPDATE discord_id="${discordId}", notification_type="${type}"`
     );
 
     await interaction.reply("Notification type set!");

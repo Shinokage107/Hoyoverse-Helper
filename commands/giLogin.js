@@ -1,10 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
 const db = require("../db.js");
-const genshin = require("../logins/genshin.js");
 const crypto = require("../encrypt.js");
+const { GenshinImpact, LanguageEnum } = require ('hoyoapi')
+
 module.exports = {
   name: "genshin",
-  description: "Sets up Auto-Login for Genshin Impact",
+  description: "Sets up Auto-Dailys for Genshin Impact",
   type: "user",
 
   commandBuilder() {
@@ -15,7 +16,7 @@ module.exports = {
         option
           .setName("cookie")
           .setDescription(
-            "The Cookie from ur Account Login, info on how to get it under /help"
+            "The Cookie from ur Daily-Signup page, info on how to get it under /help"
           )
       );
     return data;
@@ -25,14 +26,17 @@ module.exports = {
     const cookie = interaction.options.getString("cookie");
     const discordId = interaction.user.id;
 
-    const data = await genshin.checkDailyNotSigned(cookie);
+    const data = GenshinImpact.create({
+      cookie: 'cookie',
+      lang: LanguageEnum.ENGLISH, 
+    })
     if (!data)
       return await interaction.reply(
         "Sry, i was not able to login with ur cookies :c \nThe Cookie should look like this: \n**ltoken=<Some weird text>;ltuid=<Some random number>;**"
       );
 
     await db.query(
-      `INSERT INTO giredeem (discord_id, cookie) VALUES ("${discordId}", "${crypto.encrypt(
+      `INSERT INTO user (discord_id, gi_cookie) VALUES ("${discordId}", "${crypto.encrypt(
         cookie
       )}") ON DUPLICATE KEY UPDATE discord_id="${discordId}", cookie="${crypto.encrypt(
         cookie
